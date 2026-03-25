@@ -40,8 +40,8 @@ export function PaverAdjustment() {
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Output</h3>
           <div className="bg-green-50 rounded-xl p-5">
             <OutputField label="Loose thickness" unit="in" value={paverAdjustmentOutputs.looseThickness} />
-            <OutputField label="Yield" unit="tons/ft" value={paverAdjustmentOutputs.yieldTonsPerFt} decimals={4} />
-            <OutputField label="Length it should pave" unit="ft" value={paverAdjustmentOutputs.lengthShouldPave} decimals={6} />
+            <OutputField label="Yield" unit="tons/ft" value={paverAdjustmentOutputs.yieldTonsPerFt} decimals={3} />
+            <OutputField label="Length it should pave" unit="ft" value={paverAdjustmentOutputs.lengthShouldPave} decimals={1} />
             <div className={`mt-3 px-4 py-3 rounded-lg text-sm font-medium flex items-center gap-2 ${
               isThin
                 ? 'bg-red-50 text-red-700 border border-red-200'

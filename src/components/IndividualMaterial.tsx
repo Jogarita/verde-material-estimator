@@ -7,6 +7,8 @@ import { CrossSheetRef } from './CrossSheetRef';
 function validate(field: string, value: number, totalPercent?: number): string | undefined {
   if (value < 0) return 'Cannot be negative';
   if (field === 'percent' && value > 100) return 'Cannot exceed 100%';
+  if (field === 'moistureRAP' && value > 0 && (value < 2 || value > 3)) return 'Should be around 2-3%';
+  if (field === 'moistureBiochar' && value > 0 && (value < 17 || value > 20)) return 'Should be around 17-20%';
   if (field === 'totalPercent' && totalPercent !== undefined && totalPercent > 100) return 'Biochar + Cement exceeds 100%';
   return undefined;
 }
@@ -31,8 +33,8 @@ export function IndividualMaterial() {
           </div>
           <div className="flex flex-col gap-4">
             <InputField label="Optimum Fluid Content (% Aggregate)" unit="%" value={individualMaterial.optimumFluidContent} onChange={v => setIndividualMaterial('optimumFluidContent', v)} step={0.1} warning={validate('percent', individualMaterial.optimumFluidContent)} />
-            <InputField label="Moisture content of RAP" unit="%" value={individualMaterial.moistureRAP} onChange={v => setIndividualMaterial('moistureRAP', v)} step={0.1} warning={validate('percent', individualMaterial.moistureRAP)} />
-            <InputField label="Moisture content of Biochar" unit="%" value={individualMaterial.moistureBiochar} onChange={v => setIndividualMaterial('moistureBiochar', v)} step={0.1} warning={validate('percent', individualMaterial.moistureBiochar)} />
+            <InputField label="Moisture content of RAP" unit="%" value={individualMaterial.moistureRAP} onChange={v => setIndividualMaterial('moistureRAP', v)} step={0.1} warning={validate('moistureRAP', individualMaterial.moistureRAP)} />
+            <InputField label="Moisture content of Biochar" unit="%" value={individualMaterial.moistureBiochar} onChange={v => setIndividualMaterial('moistureBiochar', v)} step={0.1} warning={validate('moistureBiochar', individualMaterial.moistureBiochar)} />
             <InputField label="Target Emulsion content" unit="%" value={individualMaterial.targetEmulsion} onChange={v => setIndividualMaterial('targetEmulsion', v)} step={0.1} warning={validate('percent', individualMaterial.targetEmulsion)} />
             <InputField label="Target Biochar content" unit="%" value={individualMaterial.targetBiochar} onChange={v => setIndividualMaterial('targetBiochar', v)} step={0.1} warning={validate('totalPercent', individualMaterial.targetBiochar, totalTargetPercent)} />
             <InputField label="Target Cement content" unit="%" value={individualMaterial.targetCement} onChange={v => setIndividualMaterial('targetCement', v)} step={0.1} warning={validate('totalPercent', individualMaterial.targetCement, totalTargetPercent)} />
